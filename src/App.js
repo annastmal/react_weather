@@ -1,4 +1,4 @@
-import './App.css';
+import './styles.css';
 import SubmitForm from "./components/SubmitForm";
 import Form from "./components/Form";
 import WeatherCard from "./components/WeatherCard";
