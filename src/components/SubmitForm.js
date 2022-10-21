@@ -10,7 +10,7 @@ const SubmitForm = ({ defaultCity }) => {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(defaultCity);
   const handleResponse = useCallback(() => {
-    const apiKey = "730149abe07b6fb8812c0064d5d5897c";
+    const apiKey = "916448310e3a306ffba91ecebe45fae4";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then((res) => {
       setWeatherData({
@@ -18,7 +18,7 @@ const SubmitForm = ({ defaultCity }) => {
         temperature: res.data.main.temp,
         city: res.data.name,
         description: res.data.weather[0].description,
-        iconUrl: "https://ssl.gstatic.com/onebox/weather/64/sunny.png",
+        iconUrl: `http://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`,
         date: new Date(res.data.dt * 1000),
         wind: res.data.wind.speed,
         humidity: res.data.main.humidity,
