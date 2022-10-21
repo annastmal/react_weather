@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import axios from "axios";
+import WeatherTemperature from "./WeatherTemperature";
 import FormattedDate from "./FormattedDate";
 import WeatherForecast from "./WeatherForecast";
 import WeatherInfo from "./WeatherInfo";
@@ -48,10 +49,7 @@ const SubmitForm = ({ defaultCity }) => {
             id="icon"
             className="main-img"
           />
-          <div className="temperature">
-            <span id="tempNumber">{Math.round(weatherData.temperature)}</span>
-            <span>°C</span>{" "}
-          </div>
+          <WeatherTemperature celsius={weatherData.temperature}/>
           <div className="sunny text-capitalize" id="currentWeather">
             {weatherData.description}
           </div>
