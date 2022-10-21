@@ -1,5 +1,5 @@
 import React from "react";
-function Form() {
+function Footer() {
   return (
     <>
       <a href="https://github.com/annastmal/WeatherApp" target="blank">
@@ -9,4 +9,4 @@ function Form() {
     </>
   );
 }
-export default Form;
+export default Footer;
