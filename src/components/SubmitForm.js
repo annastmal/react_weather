@@ -25,7 +25,7 @@ const SubmitForm = ({ defaultCity }) => {
         humidity: res.data.main.humidity,
       });
     });
-  }, [weatherData, city]);
+  }, [city]);
 
   if (weatherData.ready) {
     return (
