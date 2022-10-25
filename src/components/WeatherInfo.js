@@ -1,4 +1,7 @@
-const WeatherInfo = (props) => {
+import React from "react";
+import "./styles.css";
+
+const WeatherInfo = ({ handleResponse, setCity, currentLocation }) => {
   return (
     <div className=" row-12 d-flex py-3 ">
       <form
@@ -6,7 +9,7 @@ const WeatherInfo = (props) => {
         id="signup-form"
         onSubmit={(e) => {
           e.preventDefault();
-          props.handleResponse();
+          handleResponse();
         }}
       >
         <input
@@ -16,8 +19,8 @@ const WeatherInfo = (props) => {
           name="inputCity"
           placeholder="Enter location..."
           onChange={(e) => {
-            e.preventDefault()
-            props.setCity(e.target.value);
+            e.preventDefault();
+            setCity(e.target.value);
           }}
           required
         />
@@ -31,6 +34,7 @@ const WeatherInfo = (props) => {
         type="button"
         id="currentPosition"
         className="button-current mb-4 mt-4 pr-10 "
+        onClick={currentLocation}
       >
         Current
       </div>

@@ -11,7 +11,30 @@ import "./styles.css";
 const SubmitForm = ({ defaultCity }) => {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(defaultCity);
-  const handleResponse = useCallback(async () =>  {
+
+  const getDailyWeather = useCallback((position) => {
+    let apiKey = "916448310e3a306ffba91ecebe45fae4";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then((res) => {
+      setWeatherData({
+        ready: true,
+        temperature: res.data.main.temp,
+        city: res.data.name,
+        description: res.data.weather[0].description,
+        iconUrl: `http://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`,
+        date: new Date(res.data.dt * 1000),
+        wind: res.data.wind.speed,
+        humidity: res.data.main.humidity,
+        coord: { lat: res.data.coord.lat, lon: res.data.coord.lon },
+      });
+    });
+  }, []);
+
+  const getCurrentLocation = useCallback(() => {
+    navigator.geolocation.getCurrentPosition(getDailyWeather);
+  }, []);
+
+  const handleResponse = useCallback(async () => {
     const apiKey = "916448310e3a306ffba91ecebe45fae4";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     await axios.get(apiUrl).then((res) => {
@@ -62,6 +85,7 @@ const SubmitForm = ({ defaultCity }) => {
           <WeatherInfo
             handleResponse={handleResponse}
             setCity={(city) => setCity(city)}
+            currentLocation={getCurrentLocation}
           />
         </div>
       </>

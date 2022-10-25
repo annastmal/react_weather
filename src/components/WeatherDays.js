@@ -26,7 +26,6 @@ const WeatherDays = ({ weatherData }) => {
       <div className="d-flex row-12 p-2 ">
         {daily.dailies.map((forecastDay, index) => {
           if (index < 5) {
-            console.log(forecastDay);
             return (
               <div
                 key={index}
