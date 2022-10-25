@@ -4,16 +4,17 @@ import WeatherTemperature from "./WeatherTemperature";
 import FormattedDate from "./FormattedDate";
 import WeatherForecast from "./WeatherForecast";
 import WeatherInfo from "./WeatherInfo";
+import WeatherDays from "./WeatherDays";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import "./styles.css";
 
 const SubmitForm = ({ defaultCity }) => {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(defaultCity);
-  const handleResponse = useCallback(() => {
+  const handleResponse = useCallback(async () =>  {
     const apiKey = "916448310e3a306ffba91ecebe45fae4";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then((res) => {
+    await axios.get(apiUrl).then((res) => {
       setWeatherData({
         ready: true,
         temperature: res.data.main.temp,
@@ -23,6 +24,7 @@ const SubmitForm = ({ defaultCity }) => {
         date: new Date(res.data.dt * 1000),
         wind: res.data.wind.speed,
         humidity: res.data.main.humidity,
+        coord: { lat: res.data.coord.lat, lon: res.data.coord.lon },
       });
     });
   }, [city]);
@@ -49,13 +51,14 @@ const SubmitForm = ({ defaultCity }) => {
             id="icon"
             className="main-img"
           />
-          <WeatherTemperature celsius={weatherData.temperature}/>
+          <WeatherTemperature celsius={weatherData.temperature} />
           <div className="sunny text-capitalize" id="currentWeather">
             {weatherData.description}
           </div>
         </div>
         <div className="col-8 secondary-data text-white ">
           <WeatherForecast weatherData={weatherData} />
+          <WeatherDays weatherData={weatherData} />
           <WeatherInfo
             handleResponse={handleResponse}
             setCity={(city) => setCity(city)}
