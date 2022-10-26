@@ -62,6 +62,17 @@
     padding-bottom: 0px;
     font-size: 30px;
   }
+  .conversion{
+    cursor: pointer;
+  }
+  .conversionC:hover{
+    cursor: pointer;
+    color:#bbd4dd;
+  }
+  .conversionF:hover{
+    cursor: pointer;
+    color:#bbd4dd;
+  }
   .button-current {
     background-color: #EC6E4B;
     border-radius: 5px;
@@ -96,3 +107,4 @@
     background-color: #b6e2ff;
     box-shadow: 1px 1px 5px #9fb0bd;
   }
+  
