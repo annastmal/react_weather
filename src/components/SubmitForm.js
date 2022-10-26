@@ -32,7 +32,7 @@ const SubmitForm = ({ defaultCity }) => {
 
   const getCurrentLocation = useCallback(() => {
     navigator.geolocation.getCurrentPosition(getDailyWeather);
-  }, []);
+  }, [getDailyWeather]);
 
   const handleResponse = useCallback(async () => {
     const apiKey = "916448310e3a306ffba91ecebe45fae4";

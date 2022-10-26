@@ -19,7 +19,7 @@ const WeatherDays = ({ weatherData }) => {
 
   useEffect(() => {
     getDailyWeather(weatherData);
-  }, [weatherData]);
+  }, [weatherData, getDailyWeather]);
 
   if (daily.ready) {
     return (
@@ -45,7 +45,10 @@ const WeatherDays = ({ weatherData }) => {
                 </div>
               </div>
             );
-          }
+            }
+            else {
+              return null;
+            }
         })}
       </div>
     );
